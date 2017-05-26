@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Welcome to Recipe Central!"
-        android:textColor="#2d4c9e"
+        android:textColor="@color/colorHeader"
         android:textSize="40sp"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/getRecipesButton"
