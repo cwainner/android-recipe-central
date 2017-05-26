@@ -6,24 +6,36 @@
     android:layout_height="match_parent"
     tools:context="com.cwainner.chris.recipecentral.MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/background"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Welcome to Recipe Central!"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="40sp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/getRecipesButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.100000024" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/aboutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginLeft="60dp"
         android:layout_marginStart="60dp"
         android:text="About"
@@ -36,9 +48,9 @@
         android:id="@+id/contactButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="59dp"
-        android:layout_marginRight="59dp"
+        android:layout_marginRight="60dp"
         android:text="Contact"
         android:textColor="@android:color/white"
         android:background="@color/colorPrimaryDark"
@@ -49,7 +61,7 @@
         android:id="@+id/getRecipesButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="150dp"
         android:background="@color/colorPrimary"
         android:text="Get Recipes"
         android:textColor="@android:color/white"
