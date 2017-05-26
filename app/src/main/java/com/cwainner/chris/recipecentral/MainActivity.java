@@ -1,5 +1,6 @@
 package com.cwainner.chris.recipecentral;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,10 +25,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Typeface quicksandFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
         mainHeader.setTypeface(quicksandFont);
+
+        aboutButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v){
-
+        if(v == aboutButton){
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
+        }
     }
 }
