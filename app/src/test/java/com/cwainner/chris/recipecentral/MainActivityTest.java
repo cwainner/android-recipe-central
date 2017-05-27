@@ -11,6 +11,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.support.v4.Shadows;
 
 import static org.junit.Assert.*;
 
@@ -44,6 +45,15 @@ public class MainActivityTest {
     public void contactActivityStarted(){
         activity.findViewById(R.id.contactButton).performClick();
         Intent expectedIntent = new Intent(activity, ContactActivity.class);
+        ShadowActivity shadowActivity = org.robolectric.Shadows.shadowOf(activity);
+        Intent actualIntent = shadowActivity.getNextStartedActivity();
+        assertTrue(actualIntent.filterEquals(expectedIntent));
+    }
+
+    @Test
+    public void recipesActivityStarted(){
+        activity.findViewById(R.id.getRecipesButton).performClick();
+        Intent expectedIntent = new Intent(activity, RecipesActivity.class);
         ShadowActivity shadowActivity = org.robolectric.Shadows.shadowOf(activity);
         Intent actualIntent = shadowActivity.getNextStartedActivity();
         assertTrue(actualIntent.filterEquals(expectedIntent));
