@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         aboutButton.setOnClickListener(this);
         contactButton.setOnClickListener(this);
+        getRecipesButton.setOnClickListener(this);
     }
 
     @Override
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(v == contactButton){
             Intent intent = new Intent(MainActivity.this, ContactActivity.class);
+            startActivity(intent);
+        }
+        if(v == getRecipesButton){
+            Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
             startActivity(intent);
         }
     }

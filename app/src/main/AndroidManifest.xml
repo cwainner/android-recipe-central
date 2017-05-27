@@ -21,7 +21,10 @@
         <activity
             android:name=".AboutActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ContactActivity"></activity>
+        <activity android:name=".ContactActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".RecipesActivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
