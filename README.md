@@ -12,6 +12,7 @@ A social website where users can share recipes and recipe suggestions, buy recip
 
 * Add recipe information to recipe body text in recipe detail fragments
 * Add recipe image to recipe detail fragments
+* Add instrumentation test to verify fragment functionality is correct
 
 ## Installation
 
