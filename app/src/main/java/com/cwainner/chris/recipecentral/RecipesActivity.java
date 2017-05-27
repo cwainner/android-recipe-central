@@ -28,7 +28,7 @@ public class RecipesActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String recipeType = intent.getStringExtra("recipeType");
-        recipeTypeView.setText(recipeType);
+        recipeTypeView.setText("Recipe type: " + recipeType);
 
         Typeface quicksandFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
         recipesHeader.setTypeface(quicksandFont);
