@@ -27,12 +27,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainHeader.setTypeface(quicksandFont);
 
         aboutButton.setOnClickListener(this);
+        contactButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v){
         if(v == aboutButton){
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
+        }
+        if(v == contactButton){
+            Intent intent = new Intent(MainActivity.this, ContactActivity.class);
             startActivity(intent);
         }
     }
