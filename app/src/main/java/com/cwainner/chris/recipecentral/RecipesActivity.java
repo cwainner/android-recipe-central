@@ -30,9 +30,7 @@ public class RecipesActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String recipeType = intent.getStringExtra("recipeType");
-        if(!recipeType.equals("")){
-            recipeTypeView.setText("Recipe type: " + recipeType);
-        }
+        recipeTypeView.setText("Recipe type: " + recipeType);
 
         recipeGrid.setAdapter(new RecipesArrayAdapter(this, android.R.layout.simple_list_item_1, recipes));
         recipeGrid.setOnItemClickListener(new AdapterView.OnItemClickListener(){
