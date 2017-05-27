@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.contactButton) Button contactButton;
     @Bind(R.id.getRecipesButton) Button getRecipesButton;
     @Bind(R.id.mainHeader) TextView mainHeader;
+    @Bind(R.id.recipeEditText) EditText recipeEditText;
+    @Bind(R.id.editTextView) TextView editTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Typeface quicksandFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
         mainHeader.setTypeface(quicksandFont);
+        editTextView.setTypeface(quicksandFont);
 
         aboutButton.setOnClickListener(this);
         contactButton.setOnClickListener(this);
@@ -42,7 +46,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         if(v == getRecipesButton){
+            String recipeType = recipeEditText.getText().toString();
             Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
+            intent.putExtra("recipeType", recipeType);
             startActivity(intent);
         }
     }

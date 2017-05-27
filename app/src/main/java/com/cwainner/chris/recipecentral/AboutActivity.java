@@ -20,8 +20,8 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
 
-        Typeface quicksandFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
-        aboutHeader.setTypeface(quicksandFont);
+        Typeface quickSandBoldFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
+        aboutHeader.setTypeface(quickSandBoldFont);
 
         aboutText.setText(aboutTextContent);
     }
