@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String recipeType = recipeEditText.getText().toString();
             Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
             intent.putExtra("recipeType", recipeType);
+            Toast.makeText(MainActivity.this, "Searching for Recipes", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
     }

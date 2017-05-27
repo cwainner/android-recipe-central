@@ -18,20 +18,25 @@ public class RecipeDetailFragment extends DialogFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+
         recipeDetailHeader = (TextView) rootView.findViewById(R.id.recipeDetailHeader);
         recipeDetailBody = (TextView) rootView.findViewById(R.id.recipeDetailBody);
         recipeDetailCloseButton = (Button) rootView.findViewById(R.id.recipeDetailCloseButton);
-        getDialog().setTitle("Simple Dialog");
+
+        getDialog().setTitle("Recipe Detail");
+
         Bundle bundle = this.getArguments();
         String recipeDetailHeaderText = bundle.getString("recipe");
         recipeDetailHeader.setText(recipeDetailHeaderText);
         recipeDetailBody.setText("Recipe Body");
+
         recipeDetailCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
         });
+
         return rootView;
     }
 }
