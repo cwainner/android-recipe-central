@@ -1,5 +1,6 @@
 package com.cwainner.chris.recipecentral;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -28,9 +29,15 @@ public class RecipesActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String recipeType = intent.getStringExtra("recipeType");
-        recipeTypeView.setText("Recipe type: " + recipeType);
+        if(!recipeType.equals("")){
+            recipeTypeView.setText("Recipe type: " + recipeType);
+        }
 
         Typeface quicksandFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
         recipesHeader.setTypeface(quicksandFont);
+
+        FragmentManager fm = getFragmentManager();
+        RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
+        recipeDetailFragment.show(fm, "Sample Fragment");
     }
 }
