@@ -20,7 +20,7 @@ public class RecipesArrayAdapter extends ArrayAdapter {
     @Override
     public Object getItem(int position){
         String recipe = recipes[position];
-        return String.format("Recipe: %s", recipe);
+        return recipe;
     }
 
     @Override
