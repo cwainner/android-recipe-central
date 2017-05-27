@@ -6,6 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -21,5 +22,13 @@ public class MainActivityInstrumentationTest {
     public void validateEditText(){
         onView(withId(R.id.recipeEditText)).perform(typeText("Brownies"))
                 .check(matches(withText("Brownies")));
+    }
+
+    @Test
+    public void textInputSentToRecipesActivity(){
+        String textToInput = "Brownies";
+        onView(withId(R.id.recipeEditText)).perform(typeText(textToInput));
+        onView(withId(R.id.getRecipesButton)).perform(click());
+        onView(withId(R.id.recipeTypeView)).check(matches(withText("Recipe type: " + textToInput)));
     }
 }
