@@ -39,8 +39,11 @@ public class RecipesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
                 String recipe = ((TextView)view).getText().toString();
+                Bundle bundle = new Bundle();
+                bundle.putString("recipe", recipe);
                 FragmentManager fm = getFragmentManager();
                 RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
+                recipeDetailFragment.setArguments(bundle);
                 recipeDetailFragment.show(fm, "Sample Fragment");
             }
         });

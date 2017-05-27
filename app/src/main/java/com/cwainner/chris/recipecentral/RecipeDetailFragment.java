@@ -19,7 +19,9 @@ public class RecipeDetailFragment extends DialogFragment{
         recipeDetailHeader = (TextView) rootView.findViewById(R.id.recipeDetailHeader);
         recipeDetailBody = (TextView) rootView.findViewById(R.id.recipeDetailBody);
         getDialog().setTitle("Simple Dialog");
-        recipeDetailHeader.setText("Recipe Header");
+        Bundle bundle = this.getArguments();
+        String recipeDetailHeaderText = bundle.getString("recipe");
+        recipeDetailHeader.setText(recipeDetailHeaderText);
         recipeDetailBody.setText("Recipe Body");
         return rootView;
     }
