@@ -49,11 +49,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         if(v == getRecipesButton){
-            String recipeType = recipeEditText.getText().toString();
-            Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
-            intent.putExtra("recipeType", recipeType);
-            Toast.makeText(MainActivity.this, "Searching for Recipes", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
+           if(recipeEditText.getText().toString().equals("")){
+              Toast.makeText(MainActivity.this, "Please enter ingredients to search", Toast.LENGTH_SHORT).show();
+           } else{
+               String recipeType = recipeEditText.getText().toString();
+               Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
+               intent.putExtra("recipeType", recipeType);
+               Toast.makeText(MainActivity.this, "Searching for Recipes", Toast.LENGTH_SHORT).show();
+               startActivity(intent);
+           }
         }
     }
 }
