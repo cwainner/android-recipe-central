@@ -14,7 +14,7 @@ import okhttp3.Request;
 
 public class RecipeService {
 
-    public static void findRecipes(String ingredients, String recipeType, Callback callback){
+    public static void findRecipes(String recipeType, String ingredients, Callback callback){
         OkHttpClient client = new OkHttpClient.Builder().build();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.API_BASE_URL).newBuilder();
