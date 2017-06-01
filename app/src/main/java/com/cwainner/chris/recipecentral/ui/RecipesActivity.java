@@ -11,7 +11,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.cwainner.chris.recipecentral.R;
-import com.cwainner.chris.recipecentral.RecipesArrayAdapter;
+import com.cwainner.chris.recipecentral.adapters.RecipesArrayAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,10 +29,10 @@ public class RecipesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         ButterKnife.bind(this);
 
-
         Intent intent = getIntent();
         String recipeType = intent.getStringExtra("recipeType");
-        recipeTypeView.setText("Recipe type: " + recipeType);
+        String ingredients = intent.getStringExtra("ingredients");
+        recipeTypeView.setText(recipeType + " with " + ingredients);
 
         recipeGrid.setAdapter(new RecipesArrayAdapter(this, android.R.layout.simple_list_item_1, recipes));
         recipeGrid.setOnItemClickListener(new AdapterView.OnItemClickListener(){

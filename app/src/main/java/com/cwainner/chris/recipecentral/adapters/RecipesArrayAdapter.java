@@ -1,4 +1,4 @@
-package com.cwainner.chris.recipecentral;
+package com.cwainner.chris.recipecentral.adapters;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

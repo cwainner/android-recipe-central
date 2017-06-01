@@ -22,14 +22,14 @@ public class MainActivityInstrumentationTest {
 
     @Test
     public void validateEditText(){
-        onView(withId(R.id.recipeEditText)).perform(typeText("Brownies"))
+        onView(withId(R.id.ingredientsText)).perform(typeText("Brownies"))
                 .check(matches(withText("Brownies")));
     }
 
     @Test
     public void textInputSentToRecipesActivity(){
         String textToInput = "Brownies";
-        onView(withId(R.id.recipeEditText)).perform(typeText(textToInput));
+        onView(withId(R.id.ingredientsText)).perform(typeText(textToInput));
         onView(withId(R.id.getRecipesButton)).perform(click());
         onView(withId(R.id.recipeTypeView)).check(matches(withText("Recipe type: " + textToInput)));
     }
