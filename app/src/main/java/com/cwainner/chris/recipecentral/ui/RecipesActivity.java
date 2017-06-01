@@ -1,4 +1,4 @@
-package com.cwainner.chris.recipecentral;
+package com.cwainner.chris.recipecentral.ui;
 
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.cwainner.chris.recipecentral.R;
+import com.cwainner.chris.recipecentral.RecipesArrayAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.widget.TextView;
 
+import com.cwainner.chris.recipecentral.ui.AboutActivity;
+import com.cwainner.chris.recipecentral.ui.ContactActivity;
+import com.cwainner.chris.recipecentral.ui.MainActivity;
+import com.cwainner.chris.recipecentral.ui.RecipesActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +16,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.support.v4.Shadows;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package com.cwainner.chris.recipecentral;
+package com.cwainner.chris.recipecentral.ui;
 
 
 import android.app.DialogFragment;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.cwainner.chris.recipecentral.R;
 
 
 public class RecipeDetailFragment extends DialogFragment{

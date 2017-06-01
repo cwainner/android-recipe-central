@@ -3,6 +3,8 @@ package com.cwainner.chris.recipecentral;
 import android.os.Build;
 import android.widget.TextView;
 
+import com.cwainner.chris.recipecentral.ui.ContactActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

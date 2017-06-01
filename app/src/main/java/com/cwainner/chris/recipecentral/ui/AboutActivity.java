@@ -1,9 +1,11 @@
-package com.cwainner.chris.recipecentral;
+package com.cwainner.chris.recipecentral.ui;
 
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.cwainner.chris.recipecentral.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

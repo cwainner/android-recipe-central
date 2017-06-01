@@ -2,6 +2,8 @@ package com.cwainner.chris.recipecentral;
 
 import android.support.test.rule.ActivityTestRule;
 
+import com.cwainner.chris.recipecentral.ui.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 
