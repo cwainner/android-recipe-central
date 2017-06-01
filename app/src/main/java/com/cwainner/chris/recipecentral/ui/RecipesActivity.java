@@ -27,7 +27,7 @@ public class RecipesActivity extends AppCompatActivity {
     private static final String TAG = RecipesActivity.class.getSimpleName();
     @Bind(R.id.recipesHeader) TextView recipesHeader;
     @Bind(R.id.recipeTypeView) TextView recipeTypeView;
-    @Bind(R.id.recipeGrid) GridView recipeGrid;
+//    @Bind(R.id.recipeGrid) GridView recipeGrid;
 
     private String[] recipes = new String[] {"Brownies", "Nachos", "Alfredo", "Chili", "Banana Bread", "Burger", "Cheesecake", "Ice Cream"};
 
@@ -42,19 +42,19 @@ public class RecipesActivity extends AppCompatActivity {
         String ingredients = intent.getStringExtra("ingredients");
         recipeTypeView.setText(recipeType + " with " + ingredients);
 
-        recipeGrid.setAdapter(new RecipesArrayAdapter(this, android.R.layout.simple_list_item_1, recipes));
-        recipeGrid.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
-                String recipe = ((TextView)view).getText().toString();
-                Bundle bundle = new Bundle();
-                bundle.putString("recipe", recipe);
-                FragmentManager fm = getFragmentManager();
-                RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
-                recipeDetailFragment.setArguments(bundle);
-                recipeDetailFragment.show(fm, "Sample Fragment");
-            }
-        });
+//        recipeGrid.setAdapter(new RecipesArrayAdapter(this, android.R.layout.simple_list_item_1, recipes));
+//        recipeGrid.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
+//                String recipe = ((TextView)view).getText().toString();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("recipe", recipe);
+//                FragmentManager fm = getFragmentManager();
+//                RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
+//                recipeDetailFragment.setArguments(bundle);
+//                recipeDetailFragment.show(fm, "Sample Fragment");
+//            }
+//        });
 
         Typeface quicksandFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
         recipesHeader.setTypeface(quicksandFont);
@@ -72,12 +72,7 @@ public class RecipesActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                try{
-                    String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
+                recipeService.processResults(response);
             }
         });
     }
