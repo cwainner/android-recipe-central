@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.cwainner.chris.recipecentral.R;
@@ -21,9 +22,7 @@ public class RecipesActivity extends AppCompatActivity {
     private static final String TAG = RecipesActivity.class.getSimpleName();
     @Bind(R.id.recipesHeader) TextView recipesHeader;
     @Bind(R.id.recipeTypeView) TextView recipeTypeView;
-//    @Bind(R.id.recipeGrid) GridView recipeGrid;
-
-    private String[] recipes = new String[] {"Brownies", "Nachos", "Alfredo", "Chili", "Banana Bread", "Burger", "Cheesecake", "Ice Cream"};
+    @Bind(R.id.recyclerView) RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +30,19 @@ public class RecipesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         ButterKnife.bind(this);
 
+        // Get Parameters from intent
         Intent intent = getIntent();
         String recipeType = intent.getStringExtra("recipeType");
         String ingredients = intent.getStringExtra("ingredients");
         recipeTypeView.setText(recipeType + " with " + ingredients);
 
+        // Set header font
         Typeface quicksandFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
         recipesHeader.setTypeface(quicksandFont);
 
+        // Get recipes from API
         getRecipes(recipeType, ingredients);
+
     }
 
     private void getRecipes(String recipeType, String ingredients){
