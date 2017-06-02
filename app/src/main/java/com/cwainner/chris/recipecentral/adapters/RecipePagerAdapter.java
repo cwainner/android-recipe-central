@@ -1,30 +1,34 @@
 package com.cwainner.chris.recipecentral.adapters;
 
-import android.content.Context;
-import android.widget.ArrayAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 
-/**
- * Created by Chris on 5/26/2017.
- */
+import com.cwainner.chris.recipecentral.models.Recipe;
+import com.cwainner.chris.recipecentral.ui.RecipeDetailFragment;
 
-public class RecipePagerAdapter extends ArrayAdapter {
-    private Context context;
-    private String[] recipes;
+import java.util.ArrayList;
 
-    public RecipePagerAdapter(Context context, int resource, String[] recipes){
-        super(context, resource);
-        this.context = context;
+public class RecipePagerAdapter extends FragmentPagerAdapter {
+    private ArrayList<Recipe> recipes;
+
+    public RecipePagerAdapter(FragmentManager fm, ArrayList<Recipe> recipes){
+        super(fm);
         this.recipes = recipes;
     }
 
     @Override
-    public Object getItem(int position){
-        String recipe = recipes[position];
-        return recipe;
+    public Fragment getItem(int position){
+        return RecipeDetailFragment.newInstance(recipes.get(position));
     }
 
     @Override
     public int getCount(){
-        return recipes.length;
+        return recipes.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position){
+        return recipes.get(position).getTitle();
     }
 }
