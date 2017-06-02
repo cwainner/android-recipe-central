@@ -50,8 +50,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public class RecipeViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.recipeListImage) ImageView recipeListImage;
         @Bind(R.id.recipeListTitle) TextView recipeListTitle;
-        @Bind(R.id.recipeListDetail) TextView recipeListDetail;
-        @Bind(R.id.recipeListHref) TextView recipeListHref;
 
         private Context viewHolderContext;
 
@@ -63,9 +61,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         public void bindRecipe(Recipe recipe){
             recipeListTitle.setText(recipe.getTitle());
-            Picasso.with(viewHolderContext).load(recipe.getThumbnail()).into(recipeListImage);
-            recipeListDetail.setText(recipe.getIngredients());
-            recipeListHref.setText(recipe.getHref());
+            if(!recipe.getThumbnail().isEmpty()){
+                Picasso.with(viewHolderContext).load(recipe.getThumbnail())
+                        .resize(130,100)
+                        .into(recipeListImage);
+            }
         }
     }
 
