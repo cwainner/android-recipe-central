@@ -7,11 +7,11 @@ import android.widget.ArrayAdapter;
  * Created by Chris on 5/26/2017.
  */
 
-public class RecipesArrayAdapter extends ArrayAdapter {
+public class RecipePagerAdapter extends ArrayAdapter {
     private Context context;
     private String[] recipes;
 
-    public RecipesArrayAdapter(Context context, int resource, String[] recipes){
+    public RecipePagerAdapter(Context context, int resource, String[] recipes){
         super(context, resource);
         this.context = context;
         this.recipes = recipes;

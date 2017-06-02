@@ -6,14 +6,13 @@
 
 ## Description
 
-A social website where users can share recipes and recipe suggestions, buy recipe items from the marketplace, and search for new recipes.
+A social website where users can share recipes and recipe suggestions, buy recipe items from the marketplace, and search for new recipes using the Recipe Puppy API.
 
 ## Future Plans
 
 * Add recipe information to recipe body text in recipe detail fragments
 * Add recipe image to recipe detail fragments
 * Add instrumentation test to verify fragment functionality is correct
-* Add Recipe Puppy API integration
 * Add RecyclerView to Recipes Activity
 
 ## Installation

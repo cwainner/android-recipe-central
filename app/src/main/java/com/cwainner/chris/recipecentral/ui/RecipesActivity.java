@@ -1,18 +1,12 @@
 package com.cwainner.chris.recipecentral.ui;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import com.cwainner.chris.recipecentral.R;
-import com.cwainner.chris.recipecentral.adapters.RecipesArrayAdapter;
 import com.cwainner.chris.recipecentral.services.RecipeService;
 
 import java.io.IOException;
@@ -41,20 +35,6 @@ public class RecipesActivity extends AppCompatActivity {
         String recipeType = intent.getStringExtra("recipeType");
         String ingredients = intent.getStringExtra("ingredients");
         recipeTypeView.setText(recipeType + " with " + ingredients);
-
-//        recipeGrid.setAdapter(new RecipesArrayAdapter(this, android.R.layout.simple_list_item_1, recipes));
-//        recipeGrid.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
-//                String recipe = ((TextView)view).getText().toString();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("recipe", recipe);
-//                FragmentManager fm = getFragmentManager();
-//                RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
-//                recipeDetailFragment.setArguments(bundle);
-//                recipeDetailFragment.show(fm, "Sample Fragment");
-//            }
-//        });
 
         Typeface quicksandFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
         recipesHeader.setTypeface(quicksandFont);

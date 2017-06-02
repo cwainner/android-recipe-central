@@ -1,44 +1,66 @@
 package com.cwainner.chris.recipecentral.ui;
 
 
-import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cwainner.chris.recipecentral.R;
+import com.cwainner.chris.recipecentral.models.Recipe;
+import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
-public class RecipeDetailFragment extends DialogFragment{
-    private TextView recipeDetailHeader;
-    private TextView recipeDetailBody;
-    private Button recipeDetailCloseButton;
+public class RecipeDetailFragment extends Fragment {
+    @Bind(R.id.recipeDetailHeader) TextView recipeDetailHeader;
+    @Bind(R.id.recipeDetailBody) TextView recipeDetailBody;
+    @Bind(R.id.recipeUrl) TextView recipeUrl;
+    @Bind(R.id.recipeDetailCloseButton) Button recipeDetailCloseButton;
+    @Bind(R.id.recipeImage) ImageView recipeImage;
+
+    private Recipe recipe;
+
+    public static RecipeDetailFragment newInstance(Recipe recipe){
+        RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("recipe", Parcels.wrap(recipe));
+        recipeDetailFragment.setArguments(args);
+        return recipeDetailFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        recipe = Parcels.unwrap(getArguments().getParcelable("recipe"));
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+        ButterKnife.bind(this, view);
 
-        recipeDetailHeader = (TextView) rootView.findViewById(R.id.recipeDetailHeader);
-        recipeDetailBody = (TextView) rootView.findViewById(R.id.recipeDetailBody);
-        recipeDetailCloseButton = (Button) rootView.findViewById(R.id.recipeDetailCloseButton);
+        Picasso.with(view.getContext()).load(recipe.getThumbnail()).into(recipeImage);
 
-        getDialog().setTitle("Recipe Detail");
+        recipeDetailHeader.setText(recipe.getTitle());
+        recipeUrl.setText(recipe.getHref());
+        recipeDetailBody.setText(recipe.getIngredients());
 
-        Bundle bundle = this.getArguments();
-        String recipeDetailHeaderText = bundle.getString("recipe");
-        recipeDetailHeader.setText(recipeDetailHeaderText);
-        recipeDetailBody.setText("Recipe Body");
+//        recipeDetailCloseButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
-        recipeDetailCloseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
-
-        return rootView;
+        return view;
     }
 }

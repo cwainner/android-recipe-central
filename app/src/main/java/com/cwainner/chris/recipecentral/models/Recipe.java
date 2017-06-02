@@ -1,9 +1,8 @@
 package com.cwainner.chris.recipecentral.models;
 
-/**
- * Created by chris on 01/06/17.
- */
+import org.parceler.Parcel;
 
+@Parcel
 public class Recipe {
     private String title;
     private String ingredients;
