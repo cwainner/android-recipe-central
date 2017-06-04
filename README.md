@@ -10,10 +10,9 @@ A social website where users can share recipes and recipe suggestions, buy recip
 
 ## Future Plans
 
-* Add recipe information to recipe body text in recipe detail fragments
-* Add recipe image to recipe detail fragments
 * Add instrumentation test to verify fragment functionality is correct
-* Add RecyclerView to Recipes Activity
+* Add database for users to create recipes
+* (Potential) Replace Recipe Puppy API with Yummly API
 
 ## Installation
 
