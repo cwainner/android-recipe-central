@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cwainner.chris.recipecentral.R;
 import com.cwainner.chris.recipecentral.models.Recipe;
@@ -47,7 +48,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         return recipes.size();
     }
 
-    public class RecipeViewHolder extends RecyclerView.ViewHolder {
+    public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @Bind(R.id.recipeListImage) ImageView recipeListImage;
         @Bind(R.id.recipeListTitle) TextView recipeListTitle;
 
@@ -57,6 +58,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             super(itemView);
             ButterKnife.bind(this, itemView);
             viewHolderContext = itemView.getContext();
+            itemView.setOnClickListener(this);
         }
 
         public void bindRecipe(Recipe recipe){
@@ -66,6 +68,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                         .resize(130,100)
                         .into(recipeListImage);
             }
+        }
+
+        @Override
+        public void onClick(View v){
+            Toast.makeText(v.getContext(), "Testing", Toast.LENGTH_SHORT).show();
         }
     }
 
