@@ -2,6 +2,7 @@ package com.cwainner.chris.recipecentral.ui;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,7 +22,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class RecipeDetailFragment extends Fragment {
+public class RecipeDetailFragment extends Fragment  implements  View.OnClickListener{
     @Bind(R.id.recipeDetailHeader) TextView recipeDetailHeader;
     @Bind(R.id.recipeDetailBody) TextView recipeDetailBody;
     @Bind(R.id.recipeListUrl) TextView recipeUrl;
@@ -60,14 +61,21 @@ public class RecipeDetailFragment extends Fragment {
         recipeUrl.setText(recipe.getHref());
         recipeDetailBody.setText(recipe.getIngredients());
 
-        recipeDetailCloseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        recipeDetailCloseButton.setOnClickListener(this);
+        recipeUrl.setOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v){
+        if(v == recipeDetailCloseButton){
+            Intent intent = new Intent(v.getContext(), MainActivity.class);
+            startActivity(intent);
+        }
+        if(v == recipeUrl){
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(recipe.getHref()));
+            startActivity(intent);
+        }
     }
 }
