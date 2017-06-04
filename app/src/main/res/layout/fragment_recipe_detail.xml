@@ -34,7 +34,7 @@
         android:layout_marginRight="8dp" />
 
     <TextView
-        android:id="@+id/recipeUrl"
+        android:id="@+id/recipeListUrl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -59,7 +59,7 @@
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/recipeUrl"
+        app:layout_constraintTop_toBottomOf="@+id/recipeListUrl"
         app:layout_constraintVertical_bias="0.0"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp" />

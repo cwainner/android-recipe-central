@@ -2,12 +2,14 @@ package com.cwainner.chris.recipecentral.models;
 
 import org.parceler.Parcel;
 
-//@Parcel
+@Parcel
 public class Recipe {
     private String title;
     private String ingredients;
     private String thumbnail;
     private String href;
+
+    public Recipe(){}
 
     public Recipe(String title, String ingredients, String thumbnail, String href) {
         this.title = title;

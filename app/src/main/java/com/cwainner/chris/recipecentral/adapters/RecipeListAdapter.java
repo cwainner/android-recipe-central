@@ -1,6 +1,8 @@
 package com.cwainner.chris.recipecentral.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +13,15 @@ import android.widget.Toast;
 
 import com.cwainner.chris.recipecentral.R;
 import com.cwainner.chris.recipecentral.models.Recipe;
+import com.cwainner.chris.recipecentral.ui.RecipeDetailActivity;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-/**
- * Created by Chris on 6/2/2017.
- */
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder> {
     private ArrayList<Recipe> recipes = new ArrayList<>();
@@ -51,6 +52,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @Bind(R.id.recipeListImage) ImageView recipeListImage;
         @Bind(R.id.recipeListTitle) TextView recipeListTitle;
+        @Bind(R.id.recipeListUrl) TextView recipeListUrl;
+        @Bind(R.id.recipeListIngredients) TextView recipeListIngredients;
 
         private Context viewHolderContext;
 
@@ -63,16 +66,25 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         public void bindRecipe(Recipe recipe){
             recipeListTitle.setText(recipe.getTitle());
+            recipeListIngredients.setText("Ingredients: " + recipe.getIngredients());
+            recipeListUrl.setText("Link: " + recipe.getHref());
             if(!recipe.getThumbnail().isEmpty()){
                 Picasso.with(viewHolderContext).load(recipe.getThumbnail())
-                        .resize(130,100)
+                        .resize(100,100)
+                        .centerCrop()
                         .into(recipeListImage);
             }
         }
 
         @Override
         public void onClick(View v){
-            Toast.makeText(v.getContext(), "Testing", Toast.LENGTH_SHORT).show();
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(context, RecipeDetailActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("recipes", Parcels.wrap(recipes));
+            Toast.makeText(context, recipeListTitle.getText().toString(), Toast.LENGTH_SHORT).show();
+            context.startActivity(intent);
         }
     }
 

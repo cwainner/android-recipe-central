@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 public class RecipeDetailFragment extends Fragment {
     @Bind(R.id.recipeDetailHeader) TextView recipeDetailHeader;
     @Bind(R.id.recipeDetailBody) TextView recipeDetailBody;
-    @Bind(R.id.recipeUrl) TextView recipeUrl;
+    @Bind(R.id.recipeListUrl) TextView recipeUrl;
     @Bind(R.id.recipeDetailCloseButton) Button recipeDetailCloseButton;
     @Bind(R.id.recipeImage) ImageView recipeImage;
 
@@ -48,7 +48,9 @@ public class RecipeDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
         ButterKnife.bind(this, view);
 
-        Picasso.with(view.getContext()).load(recipe.getThumbnail()).into(recipeImage);
+        if(!recipe.getThumbnail().isEmpty()){
+            Picasso.with(view.getContext()).load(recipe.getThumbnail()).into(recipeImage);
+        }
 
         recipeDetailHeader.setText(recipe.getTitle());
         recipeUrl.setText(recipe.getHref());
