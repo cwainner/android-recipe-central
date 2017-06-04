@@ -1,6 +1,7 @@
 package com.cwainner.chris.recipecentral.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -49,19 +50,23 @@ public class RecipeDetailFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         if(!recipe.getThumbnail().isEmpty()){
-            Picasso.with(view.getContext()).load(recipe.getThumbnail()).into(recipeImage);
+            Picasso.with(view.getContext()).load(recipe.getThumbnail())
+                    .resize(500, 500)
+                    .centerCrop()
+                    .into(recipeImage);
         }
 
         recipeDetailHeader.setText(recipe.getTitle());
         recipeUrl.setText(recipe.getHref());
         recipeDetailBody.setText(recipe.getIngredients());
 
-//        recipeDetailCloseButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        recipeDetailCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
