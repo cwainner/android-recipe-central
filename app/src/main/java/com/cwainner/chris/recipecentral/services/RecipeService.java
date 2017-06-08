@@ -1,5 +1,8 @@
 package com.cwainner.chris.recipecentral.services;
 
+import android.net.Uri;
+import android.util.Log;
+
 import com.cwainner.chris.recipecentral.Constants;
 import com.cwainner.chris.recipecentral.models.Recipe;
 
@@ -8,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import okhttp3.Call;
@@ -23,12 +27,13 @@ import okhttp3.Response;
 
 public class RecipeService {
 
-    public static void findRecipes(String recipeType, String ingredients, Callback callback){
+    public static void findRecipes(String ingredients, Callback callback){
         OkHttpClient client = new OkHttpClient.Builder().build();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.API_BASE_URL).newBuilder();
-        urlBuilder.addQueryParameter(Constants.INGREDIENT_QUERY_PARAMETER, ingredients);
-        urlBuilder.addQueryParameter(Constants.QUERY_PARAMETER, recipeType);
+        urlBuilder.addQueryParameter(Constants.API_ID_PARAMETER, Constants.YUMMLY_ID);
+        urlBuilder.addQueryParameter(Constants.API_KEY_PARAMETER, Constants.YUMMLY_KEY);
+        urlBuilder.addQueryParameter(Constants.QUERY_PARAMETER, ingredients);
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder()
@@ -46,15 +51,19 @@ public class RecipeService {
             String jsonData = response.body().string();
             if(response.isSuccessful()){
                 JSONObject recipeListJSON = new JSONObject(jsonData);
-                JSONArray recipeArrayJSON = recipeListJSON.getJSONArray("results");
+                JSONArray recipeArrayJSON = recipeListJSON.getJSONArray("matches");
                 for(int i = 0; i < recipeArrayJSON.length(); i++){
                     JSONObject recipeJSON = recipeArrayJSON.getJSONObject(i);
-                    String title = recipeJSON.getString("title");
-                    String href = recipeJSON.getString("href");
-                    String ingredients = recipeJSON.getString("ingredients");
-                    String thumbnail = recipeJSON.getString("thumbnail");
+                    String title = recipeJSON.getString("recipeName");
+                    String recipeId = recipeJSON.getString("id");
+                    ArrayList<String> ingredients = new ArrayList<>();
+                    JSONArray ingredientsJSONArray = recipeJSON.getJSONArray("ingredients");
+                    for(int j = 0; j < ingredientsJSONArray.length(); j++){
+                        ingredients.add(ingredientsJSONArray.get(j).toString());
+                    }
+                    String thumbnail = recipeJSON.getJSONObject("imageUrlsBySize").getString("90");
 
-                    Recipe recipe = new Recipe(title, ingredients, thumbnail, href);
+                    Recipe recipe = new Recipe(title, ingredients, thumbnail, recipeId);
                     recipes.add(recipe);
                 }
             }

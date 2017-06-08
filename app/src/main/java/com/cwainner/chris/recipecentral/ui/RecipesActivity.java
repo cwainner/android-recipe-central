@@ -40,7 +40,6 @@ public class RecipesActivity extends AppCompatActivity {
 
         // Get Parameters from intent
         Intent intent = getIntent();
-        String recipeType = intent.getStringExtra("recipeType");
         String ingredients = intent.getStringExtra("ingredients");
 
         // Set header font
@@ -48,13 +47,13 @@ public class RecipesActivity extends AppCompatActivity {
         recipesHeader.setTypeface(quicksandFont);
 
         // Get recipes from API
-        getRecipes(recipeType, ingredients);
+        getRecipes(ingredients);
 
     }
 
-    private void getRecipes(String recipeType, String ingredients){
+    private void getRecipes(String ingredients){
         final RecipeService recipeService = new RecipeService();
-        recipeService.findRecipes(recipeType, ingredients, new Callback() {
+        recipeService.findRecipes(ingredients, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();

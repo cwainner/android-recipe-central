@@ -2,27 +2,29 @@ package com.cwainner.chris.recipecentral.models;
 
 import org.parceler.Parcel;
 
+import java.util.ArrayList;
+
 @Parcel
 public class Recipe {
     private String title;
-    private String ingredients;
+    private ArrayList<String> ingredients;
     private String thumbnail;
-    private String href;
+    private String recipeId;
 
     public Recipe(){}
 
-    public Recipe(String title, String ingredients, String thumbnail, String href) {
+    public Recipe(String title, ArrayList<String> ingredients, String thumbnail, String recipeId) {
         this.title = title;
         this.ingredients = ingredients;
         this.thumbnail = thumbnail;
-        this.href = href;
+        this.recipeId = recipeId;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getIngredients() {
+    public ArrayList<String> getIngredients() {
         return ingredients;
     }
 
@@ -30,7 +32,7 @@ public class Recipe {
         return thumbnail;
     }
 
-    public String getHref() {
-        return href;
+    public String getRecipeId() {
+        return recipeId;
     }
 }

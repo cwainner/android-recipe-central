@@ -58,8 +58,8 @@ public class RecipeDetailFragment extends Fragment  implements  View.OnClickList
         }
 
         recipeDetailHeader.setText(recipe.getTitle());
-        recipeUrl.setText(recipe.getHref());
-        recipeDetailBody.setText(recipe.getIngredients());
+        recipeUrl.setText(recipe.getRecipeId());
+        recipeDetailBody.setText(android.text.TextUtils.join(", ", recipe.getIngredients()));
 
         recipeDetailCloseButton.setOnClickListener(this);
         recipeUrl.setOnClickListener(this);
@@ -74,7 +74,7 @@ public class RecipeDetailFragment extends Fragment  implements  View.OnClickList
             startActivity(intent);
         }
         if(v == recipeUrl){
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(recipe.getHref()));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(recipe.getRecipeId()));
             startActivity(intent);
         }
     }
