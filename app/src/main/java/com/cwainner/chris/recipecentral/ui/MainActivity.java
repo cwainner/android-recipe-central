@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.getRecipesButton) Button getRecipesButton;
     @Bind(R.id.mainHeader) TextView mainHeader;
     @Bind(R.id.ingredientsText) EditText ingredientsText;
-    @Bind(R.id.recipeTypeText) EditText recipeTypeText;
     @Bind(R.id.editTextView) TextView editTextView;
 
     @Override
