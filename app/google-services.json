@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "70420510057",
+    "firebase_url": "https://recipe-central-9bbae.firebaseio.com",
+    "project_id": "recipe-central-9bbae",
+    "storage_bucket": "recipe-central-9bbae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70420510057:android:612a1a8ad44e77d2",
+        "android_client_info": {
+          "package_name": "com.cwainner.chris.recipecentral"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70420510057-q40b2sh9aebqt95smmjl6kgf6mp88agq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cwainner.chris.recipecentral",
+            "certificate_hash": "736f5bcbd22c9cebd8c879cd265235a64a3eba83"
+          }
+        },
+        {
+          "client_id": "70420510057-mqtirt37nc6ku28v8qf0q973ap94hjtr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHM_GRWbwjV5Hy1pTR3MbgnPEZdvl36HY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70420510057-mqtirt37nc6ku28v8qf0q973ap94hjtr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
