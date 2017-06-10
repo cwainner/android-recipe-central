@@ -29,7 +29,8 @@
         <activity
             android:name=".ui.RecipesActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.RecipeDetailActivity"></activity>
+        <activity android:name=".ui.RecipeDetailActivity" />
+        <activity android:name=".ui.SavedRecipeListActivity"></activity>
     </application>
 
 </manifest>

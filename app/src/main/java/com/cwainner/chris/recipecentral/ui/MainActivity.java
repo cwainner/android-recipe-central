@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.mainHeader) TextView mainHeader;
     @Bind(R.id.ingredientsText) EditText ingredientsText;
     @Bind(R.id.editTextView) TextView editTextView;
+    @Bind(R.id.savedRecipesButton) Button savedRecipesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         aboutButton.setOnClickListener(this);
         contactButton.setOnClickListener(this);
         getRecipesButton.setOnClickListener(this);
+        savedRecipesButton.setOnClickListener(this);
     }
 
     @Override
@@ -58,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                Toast.makeText(MainActivity.this, "Searching for Recipes", Toast.LENGTH_SHORT).show();
                startActivity(intent);
            }
+        }
+        if(v == savedRecipesButton){
+            Intent intent = new Intent(MainActivity.this, SavedRecipeListActivity.class);
+            startActivity(intent);
         }
     }
 }
