@@ -3,7 +3,7 @@ package com.cwainner.chris.recipecentral;
 import android.os.Build;
 import android.widget.TextView;
 
-import com.cwainner.chris.recipecentral.ui.RecipesActivity;
+import com.cwainner.chris.recipecentral.ui.RecipeListActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,11 +18,11 @@ import static org.junit.Assert.*;
 @RunWith(RobolectricGradleTestRunner.class)
 
 public class RecipeActivityTest {
-    private RecipesActivity activity;
+    private RecipeListActivity activity;
 
     @Before
     public void setup(){
-        activity = Robolectric.setupActivity(RecipesActivity.class);
+        activity = Robolectric.setupActivity(RecipeListActivity.class);
     }
 
     @Test

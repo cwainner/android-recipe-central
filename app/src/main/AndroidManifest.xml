@@ -28,7 +28,7 @@
             android:name=".ui.ContactActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ui.RecipesActivity"
+            android:name=".ui.RecipeListActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.RecipeDetailActivity" />
         <activity android:name=".ui.SavedRecipeListActivity" />

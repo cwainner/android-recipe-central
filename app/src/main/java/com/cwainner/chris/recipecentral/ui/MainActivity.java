@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
               Toast.makeText(MainActivity.this, "Please enter ingredients or recipe to search", Toast.LENGTH_SHORT).show();
            } else{
                String ingredients = ingredientsText.getText().toString();
-               Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
+               Intent intent = new Intent(MainActivity.this, RecipeListActivity.class);
                intent.putExtra("ingredients", ingredients);
                Toast.makeText(MainActivity.this, "Searching for Recipes", Toast.LENGTH_SHORT).show();
                startActivity(intent);

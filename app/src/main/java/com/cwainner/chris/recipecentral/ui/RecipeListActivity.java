@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -23,8 +22,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class RecipesActivity extends AppCompatActivity {
-    public static final String TAG = RecipesActivity.class.getSimpleName();
+public class RecipeListActivity extends AppCompatActivity {
+    public static final String TAG = RecipeListActivity.class.getSimpleName();
 
     @Bind(R.id.recipesHeader) TextView recipesHeader;
     @Bind(R.id.recyclerView) RecyclerView recyclerView;
@@ -64,12 +63,12 @@ public class RecipesActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) {
                 recipes = recipeService.processResults(response);
 
-                RecipesActivity.this.runOnUiThread(new Runnable() {
+                RecipeListActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         adapter = new RecipeListAdapter(getApplicationContext(), recipes);
                         recyclerView.setAdapter(adapter);
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(RecipesActivity.this, 3);
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(RecipeListActivity.this, 3);
                         recyclerView.setLayoutManager(layoutManager);
                         recyclerView.setHasFixedSize(true);
                     }
