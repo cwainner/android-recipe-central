@@ -2,10 +2,10 @@ package com.cwainner.chris.recipecentral.ui;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class CreateAccountFragment extends Fragment implements View.OnClickListener{
@@ -32,6 +32,7 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
     private Context context;
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
 
     public CreateAccountFragment() {
         // Required empty public constructor
@@ -55,6 +56,8 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
 
         createAccountButton.setOnClickListener(this);
 
+        createAuthStateListener();
+
         return view;
     }
 
@@ -63,6 +66,18 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
         if(v == createAccountButton){
             createNewUser();
         }
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        firebaseAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        firebaseAuth.removeAuthStateListener(authStateListener);
     }
 
     private void createNewUser(){
@@ -77,9 +92,26 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                        @Override
                        public void onComplete(@NonNull Task<AuthResult> task) {
-
+                           if(task.isSuccessful()){
+                               Toast.makeText(getContext(), "Account successfully created", Toast.LENGTH_SHORT).show();
+                           }
                        }
                    });
         }
+    }
+
+    private void createAuthStateListener(){
+        authStateListener = new FirebaseAuth.AuthStateListener(){
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+            }
+        };
     }
 }
