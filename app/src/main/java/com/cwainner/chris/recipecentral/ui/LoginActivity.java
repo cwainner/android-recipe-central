@@ -7,16 +7,25 @@ import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
+import com.cwainner.chris.recipecentral.Constants;
 import com.cwainner.chris.recipecentral.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity {
+
     @Bind(R.id.createAccountButton) ToggleButton createAccountButton;
+
+    private DatabaseReference searchedReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        searchedReference = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_SEARCHED);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
