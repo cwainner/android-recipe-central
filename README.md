@@ -12,8 +12,6 @@ A social website where users can share recipes and recipe suggestions, and searc
 
 * Add instrumentation test to verify fragment functionality is correct
 * Add database for users to create recipes
-* Add Firebase authentication
-* Update layout with modal for recipe details instead of tabpager.
 
 ## Installation
 
