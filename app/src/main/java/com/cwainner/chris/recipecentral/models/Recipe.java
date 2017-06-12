@@ -10,6 +10,7 @@ public class Recipe {
     private ArrayList<String> ingredients;
     private String thumbnail;
     private String recipeId;
+    private String pushId;
 
     public Recipe(){}
 
@@ -34,5 +35,13 @@ public class Recipe {
 
     public String getRecipeId() {
         return recipeId;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }
