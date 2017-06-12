@@ -1,6 +1,7 @@
 package com.cwainner.chris.recipecentral.ui;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private ProgressDialog authProgressDialog;
 
     public CreateAccountFragment() {
         // Required empty public constructor
@@ -57,6 +59,7 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
         createAccountButton.setOnClickListener(this);
 
         createAuthStateListener();
+        createAuthProgressDialog();
 
         return view;
     }
@@ -80,6 +83,13 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
         firebaseAuth.removeAuthStateListener(authStateListener);
     }
 
+    private void createAuthProgressDialog() {
+        authProgressDialog = new ProgressDialog(context);
+        authProgressDialog.setTitle("Loading...");
+        authProgressDialog.setMessage("Authenticating with Firebase...");
+        authProgressDialog.setCancelable(false);
+    }
+
     private void createNewUser(){
         final String name = nameEditText.getText().toString().trim();
         final String email = emailEditText.getText().toString().trim();
@@ -88,12 +98,16 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
         if((password.length() < 6) || !(password.equals(confirmPassword))){
             Toast.makeText(context, "Please enter a password that is at least 6 characters long. Both passwords much also match.", Toast.LENGTH_SHORT).show();
         } else {
+            authProgressDialog.show();
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                        @Override
                        public void onComplete(@NonNull Task<AuthResult> task) {
                            if(task.isSuccessful()){
+                               authProgressDialog.dismiss();
                                Toast.makeText(getContext(), "Account successfully created", Toast.LENGTH_SHORT).show();
+                           } else {
+                               Toast.makeText(getContext(), "Authentication failed", Toast.LENGTH_SHORT).show();
                            }
                        }
                    });

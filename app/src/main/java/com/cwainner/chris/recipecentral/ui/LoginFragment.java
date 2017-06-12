@@ -1,6 +1,7 @@
 package com.cwainner.chris.recipecentral.ui;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     private Context context;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private ProgressDialog authProgressDialog;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -66,6 +68,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         };
 
         loginButton.setOnClickListener(this);
+        createAuthProgressDialog();
 
         return view;
     }
@@ -89,6 +92,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         firebaseAuth.removeAuthStateListener(authStateListener);
     }
 
+    private void createAuthProgressDialog() {
+        authProgressDialog = new ProgressDialog(context);
+        authProgressDialog.setTitle("Loading...");
+        authProgressDialog.setMessage("Authenticating with Firebase...");
+        authProgressDialog.setCancelable(false);
+    }
+
     private void loginUser(){
         final String email = emailEditText.getText().toString().trim();
         final String password = passwordEditText.getText().toString().trim();
@@ -100,12 +110,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             passwordEditText.setError("Please enter your password");
             return;
         }
+        authProgressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            authProgressDialog.dismiss();
                             Toast.makeText(context, "Authentication successful", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Authentication failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
