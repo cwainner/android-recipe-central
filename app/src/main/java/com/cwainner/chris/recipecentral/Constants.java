@@ -12,4 +12,5 @@ public class Constants {
     public static final String API_BASE_URL = "https://api.yummly.com/v1/api/recipes";
     public static final String QUERY_PARAMETER = "q";
     public static final String FIREBASE_CHILD_SEARCHED = "searched";
+    public static final String FIREBASE_CHILD_RECIPES = "recipes";
 }
