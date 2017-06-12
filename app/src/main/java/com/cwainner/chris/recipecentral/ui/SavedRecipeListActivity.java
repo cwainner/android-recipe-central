@@ -29,7 +29,7 @@ public class SavedRecipeListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         ButterKnife.bind(this);
 
-        recipeReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_SEARCHED);
+        recipeReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RECIPES);
         setUpFirebaseAdapter();
     }
 
