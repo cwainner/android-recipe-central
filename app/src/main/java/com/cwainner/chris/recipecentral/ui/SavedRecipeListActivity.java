@@ -3,6 +3,7 @@ package com.cwainner.chris.recipecentral.ui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.cwainner.chris.recipecentral.Constants;
@@ -51,7 +52,7 @@ public class SavedRecipeListActivity extends AppCompatActivity {
             }
         };
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(firebaseAdapter);
     }
 

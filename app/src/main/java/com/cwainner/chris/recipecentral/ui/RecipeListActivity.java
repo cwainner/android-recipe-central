@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -78,7 +79,7 @@ public class RecipeListActivity extends AppCompatActivity {
                     public void run() {
                         adapter = new RecipeListAdapter(getApplicationContext(), recipes);
                         recyclerView.setAdapter(adapter);
-                        recyclerView.setLayoutManager(new GridLayoutManager(RecipeListActivity.this, 3));
+                        recyclerView.setLayoutManager(new LinearLayoutManager(RecipeListActivity.this));
                         recyclerView.setHasFixedSize(true);
                     }
                 });
