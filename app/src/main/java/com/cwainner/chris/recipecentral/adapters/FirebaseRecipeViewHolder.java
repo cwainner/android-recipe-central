@@ -28,6 +28,7 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
 
     View view;
     Context context;
+    public ImageView dragIcon;
 
     public FirebaseRecipeViewHolder(View itemView){
         super(itemView);
@@ -37,6 +38,7 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
     }
 
     public void bindRecipe(Recipe recipe){
+        dragIcon = (ImageView) view.findViewById(R.id.dragIcon);
         ImageView recipeImageView = (ImageView) view.findViewById(R.id.recipeListImage);
         TextView nameTextView = (TextView) view.findViewById(R.id.recipeListTitle);
         TextView recipeListIngredients = (TextView) view.findViewById(R.id.recipeListIngredients);

@@ -1,7 +1,10 @@
 package com.cwainner.chris.recipecentral.adapters;
 
 import android.content.Context;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.cwainner.chris.recipecentral.models.Recipe;
 import com.cwainner.chris.recipecentral.util.ItemTouchHelperAdapter;
@@ -27,8 +30,17 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Recipe, F
     }
 
     @Override
-    protected void populateViewHolder(FirebaseRecipeViewHolder viewHolder, Recipe model, int position) {
+    protected void populateViewHolder(final FirebaseRecipeViewHolder viewHolder, Recipe model, int position) {
         viewHolder.bindRecipe(model);
+        viewHolder.dragIcon.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event){
+                if(MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN){
+                    onStartDragListener.onStartDrag(viewHolder);
+                }
+                return false;
+            }
+        });
     }
 
     @Override
