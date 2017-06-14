@@ -1,7 +1,9 @@
 package com.cwainner.chris.recipecentral.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -35,6 +37,8 @@ public class RecipeListActivity extends AppCompatActivity {
 
     private RecipeListAdapter adapter;
     private DatabaseReference searchedReference;
+    private SharedPreferences sharedPreferences;
+    private String searched;
 
     public ArrayList<Recipe> recipes = new ArrayList<>();
 
@@ -50,15 +54,15 @@ public class RecipeListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         // Get Parameters from intent
-        Intent intent = getIntent();
-        String ingredients = intent.getStringExtra("ingredients");
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        searched = sharedPreferences.getString(Constants.PREFERENCES_SEARCHED_KEY, null);
 
         // Set header font
         Typeface quicksandFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
         recipesHeader.setTypeface(quicksandFont);
 
         // Get recipes from API
-        getRecipes(ingredients);
+        getRecipes(searched);
 
     }
 

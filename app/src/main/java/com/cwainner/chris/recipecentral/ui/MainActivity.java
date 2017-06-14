@@ -1,7 +1,9 @@
 package com.cwainner.chris.recipecentral.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cwainner.chris.recipecentral.Constants;
 import com.cwainner.chris.recipecentral.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -28,11 +31,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.editTextView) TextView editTextView;
     @Bind(R.id.savedRecipesButton) Button savedRecipesButton;
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPreferences.edit();
 
         Typeface quicksandFont = Typeface.createFromAsset(getAssets(), "fonts/Quicksand-Bold.otf");
         mainHeader.setTypeface(quicksandFont);
@@ -75,9 +84,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
            if(ingredientsText.getText().toString().equals("")){
               Toast.makeText(MainActivity.this, "Please enter ingredients or recipe to search", Toast.LENGTH_SHORT).show();
            } else{
-               String ingredients = ingredientsText.getText().toString();
+               String searched = ingredientsText.getText().toString();
                Intent intent = new Intent(MainActivity.this, RecipeListActivity.class);
-               intent.putExtra("ingredients", ingredients);
+               addToSharedPreferences(searched);
                Toast.makeText(MainActivity.this, "Searching for Recipes", Toast.LENGTH_SHORT).show();
                startActivity(intent);
            }
@@ -94,5 +103,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    private void addToSharedPreferences(String searched){
+        editor.putString(Constants.PREFERENCES_SEARCHED_KEY, searched).apply();
     }
 }
