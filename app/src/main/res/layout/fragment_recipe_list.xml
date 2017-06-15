@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="Recipes"
             android:textAlignment="center"
-            android:textSize="40sp"
+            android:textSize="20sp"
             android:textColor="@color/colorHeader"/>
 
         <android.support.v7.widget.RecyclerView

@@ -2,6 +2,7 @@ package com.cwainner.chris.recipecentral.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import butterknife.ButterKnife;
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder> {
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Context context;
+    private int orientation;
 
     public RecipeListAdapter(Context context, ArrayList<Recipe> recipes) {
         this.context = context;
@@ -59,6 +61,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             super(itemView);
             ButterKnife.bind(this, itemView);
             viewHolderContext = itemView.getContext();
+            orientation = itemView.getResources().getConfiguration().orientation;
+
+            if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+                createDetailFragment(0);
+            }
+
             itemView.setOnClickListener(this);
         }
 
@@ -81,6 +89,10 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             intent.putExtra("position", itemPosition);
             intent.putExtra("recipes", Parcels.wrap(recipes));
             context.startActivity(intent);
+        }
+
+        private void createDetailFragment(int position){
+
         }
     }
 
