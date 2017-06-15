@@ -11,6 +11,7 @@ import com.cwainner.chris.recipecentral.Constants;
 import com.cwainner.chris.recipecentral.R;
 import com.cwainner.chris.recipecentral.models.Recipe;
 import com.cwainner.chris.recipecentral.ui.RecipeDetailActivity;
+import com.cwainner.chris.recipecentral.util.ItemTouchHelperViewHolder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +25,7 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder{
+public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder{
 
     View view;
     Context context;
@@ -50,5 +51,15 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder{
 
         nameTextView.setText(recipe.getTitle());
         recipeListIngredients.setText(android.text.TextUtils.join(", ", recipe.getIngredients()));
+    }
+
+    @Override
+    public void onItemSelected() {
+
+    }
+
+    @Override
+    public void onItemClear() {
+
     }
 }
