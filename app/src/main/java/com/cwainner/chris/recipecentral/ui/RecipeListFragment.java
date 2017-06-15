@@ -2,7 +2,6 @@ package com.cwainner.chris.recipecentral.ui;
 
 
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -58,10 +57,6 @@ public class RecipeListFragment extends Fragment {
         // Get shared preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         editor = sharedPreferences.edit();
-
-        // Set header font
-        Typeface quicksandFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Quicksand-Bold.otf");
-        recipesHeader.setTypeface(quicksandFont);
 
         setHasOptionsMenu(true);
     }

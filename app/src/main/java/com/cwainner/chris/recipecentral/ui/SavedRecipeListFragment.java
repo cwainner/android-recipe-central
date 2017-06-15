@@ -77,6 +77,14 @@ public class SavedRecipeListFragment extends Fragment implements OnStartDragList
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(firebaseAdapter);
 
+        firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                firebaseAdapter.notifyDataSetChanged();
+            }
+        });
+
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(firebaseAdapter);
         itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
