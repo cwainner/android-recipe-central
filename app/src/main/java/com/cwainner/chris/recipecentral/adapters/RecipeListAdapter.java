@@ -80,7 +80,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("position", itemPosition);
             intent.putExtra("recipes", Parcels.wrap(recipes));
-            Toast.makeText(context, recipeListTitle.getText().toString(), Toast.LENGTH_SHORT).show();
             context.startActivity(intent);
         }
     }

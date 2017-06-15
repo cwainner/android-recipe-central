@@ -24,7 +24,7 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder{
 
     View view;
     Context context;
@@ -34,7 +34,6 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
         super(itemView);
         this.view = itemView;
         this.context = itemView.getContext();
-        itemView.setOnClickListener(this);
     }
 
     public void bindRecipe(Recipe recipe){
@@ -51,33 +50,5 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
 
         nameTextView.setText(recipe.getTitle());
         recipeListIngredients.setText(android.text.TextUtils.join(", ", recipe.getIngredients()));
-    }
-
-    @Override
-    public void onClick(View v) {
-        final ArrayList<Recipe> recipes = new ArrayList<>();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RECIPES).child(uid);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    recipes.add(snapshot.getValue(Recipe.class));
-                }
-
-                int itemPosition = getLayoutPosition();
-
-                Intent intent = new Intent(context, RecipeDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("recipes", Parcels.wrap(recipes));
-                context.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 }

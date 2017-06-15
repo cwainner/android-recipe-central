@@ -1,11 +1,14 @@
 package com.cwainner.chris.recipecentral.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.cwainner.chris.recipecentral.Constants;
 import com.cwainner.chris.recipecentral.models.Recipe;
+import com.cwainner.chris.recipecentral.ui.RecipeDetailActivity;
 import com.cwainner.chris.recipecentral.util.ItemTouchHelperAdapter;
 import com.cwainner.chris.recipecentral.util.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -14,6 +17,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -71,7 +76,7 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Recipe, F
     }
 
     @Override
-    protected void populateViewHolder(final FirebaseRecipeViewHolder viewHolder, Recipe model, int position) {
+    protected void populateViewHolder(final FirebaseRecipeViewHolder viewHolder, Recipe model, final int position) {
         viewHolder.bindRecipe(model);
         viewHolder.dragIcon.setOnTouchListener(new View.OnTouchListener(){
             @Override
@@ -80,6 +85,15 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Recipe, F
                     onStartDragListener.onStartDrag(viewHolder);
                 }
                 return false;
+            }
+        });
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(context, RecipeDetailActivity.class);
+                intent.putExtra("position", viewHolder.getAdapterPosition());
+                intent.putExtra("recipes", Parcels.wrap(recipes));
+                context.startActivity(intent);
             }
         });
     }
