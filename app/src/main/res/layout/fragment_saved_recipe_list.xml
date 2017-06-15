@@ -4,10 +4,26 @@
     android:layout_height="match_parent"
     tools:context="com.cwainner.chris.recipecentral.ui.SavedRecipeListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/recipesHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saved Recipes"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:textColor="@color/colorHeader"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"/>
+
+    </LinearLayout>
 
 </FrameLayout>
