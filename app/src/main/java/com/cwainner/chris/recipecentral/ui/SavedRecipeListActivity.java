@@ -13,6 +13,7 @@ import com.cwainner.chris.recipecentral.adapters.FirebaseRecipeListAdapter;
 import com.cwainner.chris.recipecentral.adapters.FirebaseRecipeViewHolder;
 import com.cwainner.chris.recipecentral.models.Recipe;
 import com.cwainner.chris.recipecentral.util.OnStartDragListener;
+import com.cwainner.chris.recipecentral.util.SimpleItemTouchHelperCallback;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
 
 public class SavedRecipeListActivity extends AppCompatActivity implements OnStartDragListener{
     private DatabaseReference recipeReference;
-    private FirebaseRecyclerAdapter firebaseAdapter;
+    private FirebaseRecipeListAdapter firebaseAdapter;
     private ItemTouchHelper itemTouchHelper;
 
     @Bind(R.id.recyclerView) RecyclerView recyclerView;
@@ -53,6 +54,10 @@ public class SavedRecipeListActivity extends AppCompatActivity implements OnStar
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(firebaseAdapter);
+
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(firebaseAdapter);
+        itemTouchHelper = new ItemTouchHelper(callback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     @Override
