@@ -19,12 +19,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class SavedRecipeListActivity extends AppCompatActivity implements OnStartDragListener{
-    private DatabaseReference recipeReference;
     private FirebaseRecipeListAdapter firebaseAdapter;
     private ItemTouchHelper itemTouchHelper;
 
@@ -44,12 +44,12 @@ public class SavedRecipeListActivity extends AppCompatActivity implements OnStar
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
-        recipeReference = FirebaseDatabase
-                .getInstance()
+        Query query = FirebaseDatabase.getInstance()
                 .getReference(Constants.FIREBASE_CHILD_RECIPES)
-                .child(uid);
+                .child(uid)
+                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
 
-        firebaseAdapter = new FirebaseRecipeListAdapter(Recipe.class, R.layout.recipe_list_item_drag, FirebaseRecipeViewHolder.class, recipeReference, this, this);
+        firebaseAdapter = new FirebaseRecipeListAdapter(Recipe.class, R.layout.recipe_list_item_drag, FirebaseRecipeViewHolder.class, query, this, this);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
