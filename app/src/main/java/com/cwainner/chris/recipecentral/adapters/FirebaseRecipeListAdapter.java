@@ -2,13 +2,18 @@ package com.cwainner.chris.recipecentral.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.cwainner.chris.recipecentral.Constants;
+import com.cwainner.chris.recipecentral.R;
 import com.cwainner.chris.recipecentral.models.Recipe;
 import com.cwainner.chris.recipecentral.ui.RecipeDetailActivity;
+import com.cwainner.chris.recipecentral.ui.RecipeDetailFragment;
 import com.cwainner.chris.recipecentral.util.ItemTouchHelperAdapter;
 import com.cwainner.chris.recipecentral.util.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -31,6 +36,7 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Recipe, F
     private Context context;
     private ChildEventListener childEventListener;
     private ArrayList<Recipe> recipes = new ArrayList<>();
+    private int orientation;
 
     public FirebaseRecipeListAdapter(Class<Recipe> modelClass, int modelLayout,
                                      Class<FirebaseRecipeViewHolder> viewHolderClass,
@@ -78,6 +84,12 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Recipe, F
     @Override
     protected void populateViewHolder(final FirebaseRecipeViewHolder viewHolder, Recipe model, final int position) {
         viewHolder.bindRecipe(model);
+
+        orientation = viewHolder.itemView.getResources().getConfiguration().orientation;
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            createDetailFragment(0);
+        }
+
         viewHolder.dragIcon.setOnTouchListener(new View.OnTouchListener(){
             @Override
             public boolean onTouch(View v, MotionEvent event){
@@ -90,10 +102,15 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Recipe, F
         viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(context, RecipeDetailActivity.class);
-                intent.putExtra("position", viewHolder.getAdapterPosition());
-                intent.putExtra("recipes", Parcels.wrap(recipes));
-                context.startActivity(intent);
+                int itemPosition = viewHolder.getAdapterPosition();
+                if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+                    createDetailFragment(itemPosition);
+                } else {
+                    Intent intent = new Intent(context, RecipeDetailActivity.class);
+                    intent.putExtra("position", viewHolder.getAdapterPosition());
+                    intent.putExtra("recipes", Parcels.wrap(recipes));
+                    context.startActivity(intent);
+                }
             }
         });
     }
@@ -118,5 +135,13 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Recipe, F
             recipe.setIndex(Integer.toString(index));
             ref.setValue(recipe);
         }
+    }
+
+    private void createDetailFragment(int position){
+        RecipeDetailFragment recipeDetailFragment = RecipeDetailFragment.newInstance(recipes, position);
+
+        FragmentTransaction fragmentTransaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentDetailContainer, recipeDetailFragment);
+        fragmentTransaction.commit();
     }
 }

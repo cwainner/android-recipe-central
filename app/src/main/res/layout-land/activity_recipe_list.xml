@@ -40,6 +40,7 @@
         android:id="@+id/view" />
 
     <FrameLayout
+        android:id="@+id/fragmentDetailContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintHorizontal_weight="6"

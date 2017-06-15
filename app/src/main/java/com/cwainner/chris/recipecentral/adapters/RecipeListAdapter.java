@@ -3,6 +3,8 @@ package com.cwainner.chris.recipecentral.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.cwainner.chris.recipecentral.R;
 import com.cwainner.chris.recipecentral.models.Recipe;
 import com.cwainner.chris.recipecentral.ui.RecipeDetailActivity;
+import com.cwainner.chris.recipecentral.ui.RecipeDetailFragment;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -84,15 +87,23 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         @Override
         public void onClick(View v){
             int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(context, RecipeDetailActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("position", itemPosition);
-            intent.putExtra("recipes", Parcels.wrap(recipes));
-            context.startActivity(intent);
+            if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+                createDetailFragment(itemPosition);
+            } else {
+                Intent intent = new Intent(context, RecipeDetailActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("position", itemPosition);
+                intent.putExtra("recipes", Parcels.wrap(recipes));
+                context.startActivity(intent);
+            }
         }
 
         private void createDetailFragment(int position){
+            RecipeDetailFragment recipeDetailFragment = RecipeDetailFragment.newInstance(recipes, position);
 
+            FragmentTransaction fragmentTransaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentDetailContainer, recipeDetailFragment);
+            fragmentTransaction.commit();
         }
     }
 
